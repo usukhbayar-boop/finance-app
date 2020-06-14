@@ -28,7 +28,29 @@ var uiController = (function () {
 })();
 
 // Санхүүтэй ажиллах контроллер
-var fnController = (function () {})();
+var fnController = (function () {
+  var Income = function (id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+  var Expence = function (id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+
+  var data = {
+    allItems: {
+      inc: [],
+      exp: [],
+    },
+    totals: {
+      inc: 0,
+      exp: 0,
+    },
+  };
+})();
 
 // Програмын холбогч контроллер
 var appController = (function (parameter1, parameter2) {
