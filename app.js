@@ -38,7 +38,7 @@ var uiController = (function () {
 
     var z = y.split("").reverse().join("");
 
-    if (z[i] === ",") z = z.substr(1, z.length - 1);
+    if (z[0] === ",") z = z.substr(1, z.length - 1);
     if (type === "inc") z = "+ " + z;
     else z = "- " + z;
 
@@ -50,6 +50,20 @@ var uiController = (function () {
       var unuudur = new Date();
       document.querySelector(DOMStrings.dateLabel).textContent =
         unuudur.getFullYear() + " оны " + unuudur.getMonth() + " сарын ";
+    },
+
+    changeType: function () {
+      var fields = document.querySelectorAll(
+        DOMStrings.inputType +
+          ", " +
+          DOMStrings.inputDescription +
+          ", " +
+          DOMStrings.inputValue
+      );
+      nodeListForeach(fields, function (el) {
+        el.classList.toggle("red-focus");
+      });
+      document.querySelector(DOMStrings.addBtn).classList.toggle("red");
     },
 
     getInput: function () {
@@ -67,7 +81,7 @@ var uiController = (function () {
       );
       // Элемент болгоны хувьд хувийг нь массиваас олж дэлгэц дээр оруулах
       nodeListForeach(elements, function (el, index) {
-        el.textContent = allPercentages[index];
+        el.textContent = allPercentages[index] + "%";
       });
     },
 
@@ -299,6 +313,10 @@ var appController = (function (uiController, financeController) {
         ctrlAddItem();
       }
     });
+
+    document
+      .querySelector(DOM.inputType)
+      .addEventListener("change", uiController.changeType);
 
     document
       .querySelector(DOM.containerDiv)
